@@ -8,10 +8,13 @@
 :set clipboard=unnamed
 :set encoding=UTF-8
 :set nuw=6
+:set cursorline
+:set showmode
 
 language en_US
 
 call plug#begin()
+Plug 'preservim/nerdcommenter'								"Nerdcommenter
 Plug 'scrooloose/nerdtree'									"Nerdtree
 Plug 'majutsushi/tagbar'
 Plug 'ryanoasis/vim-devicons'
@@ -30,7 +33,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'cloudhead/neovim-fuzzy'								"Fuzzy search
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/async.vim'
-
+Plug 'mattn/vim-lsp-icons'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 " SourceKit-LSP configuration
@@ -42,13 +46,18 @@ if executable('sourcekit-lsp')
         \ })
 endif
 
-let g:catppuccin_flavour = "mocha" " latte, frappe, macchiato, mocha
+let g:airline_powerline_fonts = 1
+let g:airline_theme='gruvbox'
 
-lua << EOF
-require("catppuccin").setup()
-EOF
+" let g:catppuccin_flavour = "mocha" " latte, frappe, macchiato, mocha
 
-colorscheme catppuccin
+" lua << EOF
+" require("catppuccin").setup()
+" EOF
+
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1 "Setup colors
+
+colorscheme gruvbox
 
 autocmd FileType swift setlocal omnifunc=lsp#complete
 
